@@ -2,8 +2,9 @@
 
 import chalk from 'chalk';
 import chalkAnimation from 'chalk-animation';
+import inquirer from 'inquirer';
 
-let playerNmae;
+let playerName;
 
 const sleep = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -23,4 +24,19 @@ async function main() {
   );
 }
 
-await main();
+async function askName() {
+  const answers = await inquirer.prompt({
+    name: 'player_name',
+    type: 'input',
+    message: 'What is your name?',
+    default() {
+      return 'Player';
+    },
+  });
+
+  playerName = answers.player_name;
+}
+
+// await main();
+
+await askName();
